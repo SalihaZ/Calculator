@@ -21,7 +21,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JPasswordField;
 import javax.swing.border.Border;
 
-public class Calcul {
+public class CalculJason {
 
 	private JFrame frame;
 	private JTextField textDisplay;
@@ -43,7 +43,7 @@ public class Calcul {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Calcul window = new Calcul();
+					CalculJason window = new CalculJason();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +55,7 @@ public class Calcul {
 	/**
 	 * Create the application.
 	 */
-	public Calcul() {
+	public CalculJason() {
 		initialize();
 	}
 
@@ -75,14 +75,16 @@ public class Calcul {
 		btn0.setBackground(new Color(189, 190, 192));
 		btn0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//String EnterNum = textDisplay.getText() + btn0.getText();
 
 				if (textDisplay.getText().equals("0")) {
 					enterNum = btn0.getText();
 				}
-				
-				writeScreen(enterNum+ "0");
-				// textDisplay.setText(EnterNum);
+
+				textDisplay.setText(enterNum + "0");
+
+				enterNum = textDisplay.getText();
+				firstnum = Double.valueOf(enterNum);
+
 			}
 		});
 		btn0.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -103,8 +105,8 @@ public class Calcul {
 				}
 				;
 
-				writeScreen(enterNum+".");
-				// textDisplay.setText(EnterNum);
+				writeScreen(enterNum +".");
+				
 			}
 		});
 		btnDot.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -153,7 +155,6 @@ public class Calcul {
 		btnEqual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
 				calcul();
 				operations = '\u0000';
 				result = String.valueOf(textDisplay.getText());
@@ -172,11 +173,11 @@ public class Calcul {
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
-				writeScreen(enterNum+"1");
-				//textDisplay.setText(enterNum + "1");
+				textDisplay.setText(enterNum + "1");
 				enterNum = textDisplay.getText();
 				firstnum = Double.valueOf(enterNum);
+				
+				
 
 			}
 		});
@@ -193,27 +194,11 @@ public class Calcul {
 
 			public void actionPerformed(ActionEvent e) {
 
-				writeScreen(enterNum+"2");
-				
-				//textDisplay.setText(enterNum + "2");
+				textDisplay.setText(enterNum + "2");
 
 				enterNum = textDisplay.getText();
 				firstnum = Double.valueOf(enterNum);
-				
-//				if (num == true) {// flag à faire
-//					textDisplay.setText("2");
-//					System.out.println("c'est un nouveau nombre");
-//				} else {
-//					//String EnterNum = textDisplay.getText() + btn2.getText();
-//
-//					if (textDisplay.getText().equals("0")) {
-//						enterNum = btn2.getText();
-//					}
-//
-//					textDisplay.setText(enterNum);
-//
-//				}
-//				num = false;
+
 			}
 		});
 		btn2.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -228,20 +213,10 @@ public class Calcul {
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
-				writeScreen(enterNum+"3");
-				//textDisplay.setText(enterNum + "3");
+				textDisplay.setText(enterNum + "3");
 
 				enterNum = textDisplay.getText();
 				firstnum = Double.valueOf(enterNum);
-				
-//				String EnterNum = textDisplay.getText() + btn3.getText();
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn3.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
 			}
 		});
 		btn3.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -255,11 +230,8 @@ public class Calcul {
 		btnMin.setBackground(new Color(189, 190, 192));
 		btnMin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				firstnum = Double.parseDouble(textDisplay.getText());
-				
 				textDisplay.setText("");
-				calcul();
 				operations = '-';
 			}
 		});
@@ -274,23 +246,11 @@ public class Calcul {
 		btn4.setBackground(new Color(189, 190, 192));
 		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"4");
-				//textDisplay.setText(enterNum + "4");
+				textDisplay.setText(enterNum + "4");
 
 				enterNum = textDisplay.getText();
 				firstnum = Double.valueOf(enterNum);
-				
 			}
-//				String EnterNum = textDisplay.getText() + btn4.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn4.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
-//			}
 		});
 		btn4.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btn4.setBounds(20, 358, 59, 48);
@@ -303,23 +263,12 @@ public class Calcul {
 		btn5.setBackground(new Color(189, 190, 192));
 		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"5");
-				//textDisplay.setText(enterNum + "5");
+
+				textDisplay.setText(enterNum + "5");
 
 				enterNum = textDisplay.getText();
 				firstnum = Double.valueOf(enterNum);
-				
 			}
-//				String EnterNum = textDisplay.getText() + btn5.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn5.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
-//			}
 		});
 		btn5.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btn5.setBounds(89, 358, 59, 48);
@@ -332,20 +281,10 @@ public class Calcul {
 		btn6.setBackground(new Color(189, 190, 192));
 		btn6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"6");
-				//textDisplay.setText(enterNum + "6");
+				textDisplay.setText(enterNum + "6");
 
 				enterNum = textDisplay.getText();
 				firstnum = Double.valueOf(enterNum);
-//				String EnterNum = textDisplay.getText() + btn6.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn6.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
 			}
 		});
 		btn6.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -363,7 +302,6 @@ public class Calcul {
 				firstnum = readScreen();
 				// firstnum = Double.parseDouble(textDisplay.getText());
 				textDisplay.setText("");
-				calcul();
 				operations = '*';
 			}
 		});
@@ -381,7 +319,6 @@ public class Calcul {
 				firstnum = readScreen();
 				// firstnum = Double.parseDouble(textDisplay.getText());
 				textDisplay.setText("");
-				calcul();
 				operations = '/';
 			}
 		});
@@ -396,18 +333,10 @@ public class Calcul {
 		btn7.setBackground(new Color(189, 190, 192));
 		btn7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"7");
+				textDisplay.setText(enterNum + "7");
+
 				enterNum = textDisplay.getText();
 				firstnum = Double.valueOf(enterNum);
-//				String EnterNum = textDisplay.getText() + btn7.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn7.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
 			}
 		});
 		btn7.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -421,21 +350,11 @@ public class Calcul {
 		btn8.setBackground(new Color(189, 190, 192));
 		btn8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"8");
+				textDisplay.setText(enterNum + "8");
+
 				enterNum = textDisplay.getText();
 				firstnum = Double.valueOf(enterNum);
-				
 			}
-//				String EnterNum = textDisplay.getText() + btn8.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn8.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
-//			}
 		});
 		btn8.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btn8.setBounds(89, 299, 59, 48);
@@ -448,20 +367,11 @@ public class Calcul {
 		btn9.setBackground(new Color(189, 190, 192));
 		btn9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"9");
+				textDisplay.setText(enterNum + "9");
+
 				enterNum = textDisplay.getText();
 				firstnum = Double.valueOf(enterNum);
 			}
-//				String EnterNum = textDisplay.getText() + btn9.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn9.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
-//			}
 		});
 		btn9.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btn9.setBounds(156, 299, 59, 48);
@@ -576,7 +486,7 @@ public class Calcul {
 				{
 
 					StringBuilder strB = new StringBuilder(textDisplay.getText());
-					//strB.deleteCharAt(textDisplay.getText().length() - 1);
+					strB.deleteCharAt(textDisplay.getText().length() - 1);
 					back = strB.toString();
 					textDisplay.setText(back);
 				}
@@ -651,7 +561,8 @@ public class Calcul {
 
 		switch (operations) {
 		case '+':
-			secondnum+= firstnum ;
+			secondnum += firstnum;
+			
 			break;
 		case '-':
 			secondnum -= firstnum;
@@ -660,20 +571,18 @@ public class Calcul {
 			secondnum *= firstnum;
 			break;
 		case '/':
-			secondnum /=firstnum ;
+			secondnum /= firstnum;
 			break;
 		default:
 			secondnum = firstnum;
 		}
 		enterNum = "";
-
 		// operations = null;
 		result = String.valueOf(secondnum);
 
 		textDisplay.setText(result);
 
 		System.out.println("2)F: " + firstnum + " s: " + secondnum + " num: " + num + " operation: " + operations);
-
 	}
 
 }
