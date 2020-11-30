@@ -27,14 +27,15 @@ public class Calcul {
 	private JTextField textDisplay;
 
 	char operations;
-	String result;
-	Double firstnum;
-	Double secondnum;
-	String enterNum = "";
-
-	Boolean num = true;
-	String operateur = null;
-	Double memory;
+	private String result;
+	private Double op2;
+	private Double op1;
+	private String enterNum = "";
+	private boolean dot = false;
+	private boolean offOn = false;
+	private Boolean num = true;
+	private String operateur = null;
+	private Double memory = 0d;
 
 	/**
 	 * Launch the application.
@@ -69,20 +70,22 @@ public class Calcul {
 		frame.getContentPane().setBackground(new Color(34, 30, 31));
 		frame.getContentPane().setLayout(null);
 
-		// ************************* "0" ******************************
+		// ************* Method for the zero button "0" **************
 
 		JButton btn0 = new JButton("0");
 		btn0.setBackground(new Color(189, 190, 192));
 		btn0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//String EnterNum = textDisplay.getText() + btn0.getText();
+
+				writeScreen(enterNum + "0");
+
+				enterNum = textDisplay.getText();
+				op2 = Double.valueOf(enterNum);
 
 				if (textDisplay.getText().equals("0")) {
-					enterNum = btn0.getText();
+					enterNum = "";
 				}
-				
-				writeScreen(enterNum+ "0");
-				// textDisplay.setText(EnterNum);
+
 			}
 		});
 		btn0.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -90,21 +93,22 @@ public class Calcul {
 		btn0.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btn0);
 
-		// ************************* "." ******************************
+		// **********Method for the dot button "." *******************
 
 		JButton btnDot = new JButton(".");
 		btnDot.setBackground(new Color(189, 190, 192));
 		btnDot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//String EnterNum = textDisplay.getText() + btnDot.getText();
 
-				if (textDisplay.getText().equals(".")) {
-					enterNum = btnDot.getText();
+				enterNum = textDisplay.getText();
+				if (e.getSource() == btnDot) {
+					textDisplay.setText(enterNum);
 				}
-				;
 
-				writeScreen(enterNum+".");
-				// textDisplay.setText(EnterNum);
+				if (e.getSource() == btnDot && !enterNum.contains(".")) {
+					textDisplay.setText(enterNum + ".");
+				}
+
 			}
 		});
 		btnDot.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -112,7 +116,7 @@ public class Calcul {
 		btnDot.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btnDot);
 
-		// *************************/+/-*******************************
+		// ************Method for the button of sign "+/-" ****************
 
 		JButton btnSign = new JButton("+/-");
 		btnSign.setBackground(new Color(189, 190, 192));
@@ -129,7 +133,7 @@ public class Calcul {
 		btnSign.setMargin(new Insets(2, 5, 2, 5));
 		frame.getContentPane().add(btnSign);
 
-		// ************************* + *******************************
+		// ****************Method for the addition button "+" *************
 
 		JButton btnAdd = new JButton("+");
 		btnAdd.setBackground(new Color(189, 190, 192));
@@ -146,14 +150,13 @@ public class Calcul {
 		btnAdd.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btnAdd);
 
-		// ************************* = *******************************
+		// ******************Method for Equal button "=" ***********************
 
 		JButton btnEqual = new JButton("=");
 		btnEqual.setBackground(new Color(189, 190, 192));
 		btnEqual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
 				calcul();
 				operations = '\u0000';
 				result = String.valueOf(textDisplay.getText());
@@ -165,18 +168,17 @@ public class Calcul {
 		btnEqual.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btnEqual);
 
-		// ************************* "1" *******************************
+		// *****************Method for the button one "1" **************
 
 		JButton btn1 = new JButton("1");
 		btn1.setBackground(new Color(189, 190, 192));
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
-				writeScreen(enterNum+"1");
-				//textDisplay.setText(enterNum + "1");
+				writeScreen(enterNum + "1");
+
 				enterNum = textDisplay.getText();
-				firstnum = Double.valueOf(enterNum);
+				op2 = Double.valueOf(enterNum);
 
 			}
 		});
@@ -185,7 +187,7 @@ public class Calcul {
 		btn1.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btn1);
 
-		// ************************* "2" *******************************
+		// *****************Method for the button two "2" ************
 
 		JButton btn2 = new JButton("2");
 		btn2.setBackground(new Color(189, 190, 192));
@@ -193,27 +195,11 @@ public class Calcul {
 
 			public void actionPerformed(ActionEvent e) {
 
-				writeScreen(enterNum+"2");
-				
-				//textDisplay.setText(enterNum + "2");
+				writeScreen(enterNum + "2");
 
 				enterNum = textDisplay.getText();
-				firstnum = Double.valueOf(enterNum);
-				
-//				if (num == true) {// flag à faire
-//					textDisplay.setText("2");
-//					System.out.println("c'est un nouveau nombre");
-//				} else {
-//					//String EnterNum = textDisplay.getText() + btn2.getText();
-//
-//					if (textDisplay.getText().equals("0")) {
-//						enterNum = btn2.getText();
-//					}
-//
-//					textDisplay.setText(enterNum);
-//
-//				}
-//				num = false;
+				op2 = Double.valueOf(enterNum);
+
 			}
 		});
 		btn2.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -221,27 +207,18 @@ public class Calcul {
 		btn2.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btn2);
 
-		// ************************* "3" *******************************
+		// ****************Method for the button three "3" ************
 
 		JButton btn3 = new JButton("3");
 		btn3.setBackground(new Color(189, 190, 192));
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
-				writeScreen(enterNum+"3");
-				//textDisplay.setText(enterNum + "3");
+				writeScreen(enterNum + "3");
 
 				enterNum = textDisplay.getText();
-				firstnum = Double.valueOf(enterNum);
-				
-//				String EnterNum = textDisplay.getText() + btn3.getText();
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn3.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
+				op2 = Double.valueOf(enterNum);
+
 			}
 		});
 		btn3.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -249,16 +226,13 @@ public class Calcul {
 		btn3.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btn3);
 
-		// ************************* "-" *******************************
+		// ************Method for the button minus "-" **********
 
 		JButton btnMin = new JButton("-");
 		btnMin.setBackground(new Color(189, 190, 192));
 		btnMin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				firstnum = Double.parseDouble(textDisplay.getText());
-				
-				textDisplay.setText("");
+
 				calcul();
 				operations = '-';
 			}
@@ -268,84 +242,60 @@ public class Calcul {
 		btnMin.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btnMin);
 
-		// ************************* "4" *******************************
+		// *********Method for the button four "4" ************
 
 		JButton btn4 = new JButton("4");
 		btn4.setBackground(new Color(189, 190, 192));
 		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"4");
-				//textDisplay.setText(enterNum + "4");
+
+				writeScreen(enterNum + "4");
+				// textDisplay.setText(enterNum + "4");
 
 				enterNum = textDisplay.getText();
-				firstnum = Double.valueOf(enterNum);
-				
+				op2 = Double.valueOf(enterNum);
+
 			}
-//				String EnterNum = textDisplay.getText() + btn4.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn4.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
-//			}
+
 		});
 		btn4.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btn4.setBounds(20, 358, 59, 48);
 		btn4.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btn4);
 
-		// ************************* "5" *******************************
+		// ******************Method for the button five "5" **************
 
 		JButton btn5 = new JButton("5");
 		btn5.setBackground(new Color(189, 190, 192));
 		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"5");
-				//textDisplay.setText(enterNum + "5");
+
+				writeScreen(enterNum + "5");
+				// textDisplay.setText(enterNum + "5");
 
 				enterNum = textDisplay.getText();
-				firstnum = Double.valueOf(enterNum);
-				
+				op2 = Double.valueOf(enterNum);
+
 			}
-//				String EnterNum = textDisplay.getText() + btn5.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn5.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
-//			}
+
 		});
 		btn5.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btn5.setBounds(89, 358, 59, 48);
 		btn5.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btn5);
 
-		// ************************* "6" *******************************
+		// **************Method for the button six "6" ***********
 
 		JButton btn6 = new JButton("6");
 		btn6.setBackground(new Color(189, 190, 192));
 		btn6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"6");
-				//textDisplay.setText(enterNum + "6");
+
+				writeScreen(enterNum + "6");
 
 				enterNum = textDisplay.getText();
-				firstnum = Double.valueOf(enterNum);
-//				String EnterNum = textDisplay.getText() + btn6.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn6.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
+				op2 = Double.valueOf(enterNum);
+
 			}
 		});
 		btn6.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -353,16 +303,13 @@ public class Calcul {
 		btn6.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btn6);
 
-		// ************************* "*" *******************************
+		// **************Method for the multiplication button "*" ******************
 
 		JButton btnX = new JButton("*");
 		btnX.setBackground(new Color(189, 190, 192));
 		btnX.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				firstnum = readScreen();
-				// firstnum = Double.parseDouble(textDisplay.getText());
-				textDisplay.setText("");
 				calcul();
 				operations = '*';
 			}
@@ -372,15 +319,13 @@ public class Calcul {
 		btnX.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btnX);
 
-		// ************************* "/" ******************************
+		// ******************Method for the division button "/" **********************
 
 		JButton btnDiv = new JButton("\u00F7");
 		btnDiv.setBackground(new Color(189, 190, 192));
 		btnDiv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				firstnum = readScreen();
-				// firstnum = Double.parseDouble(textDisplay.getText());
-				textDisplay.setText("");
+
 				calcul();
 				operations = '/';
 			}
@@ -390,24 +335,17 @@ public class Calcul {
 		btnDiv.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btnDiv);
 
-		// ************************* "7" ******************************
+		// *************Method for the button seven "7" **************
 
 		JButton btn7 = new JButton("7");
 		btn7.setBackground(new Color(189, 190, 192));
 		btn7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"7");
+
+				writeScreen(enterNum + "7");
 				enterNum = textDisplay.getText();
-				firstnum = Double.valueOf(enterNum);
-//				String EnterNum = textDisplay.getText() + btn7.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn7.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
+				op2 = Double.valueOf(enterNum);
+
 			}
 		});
 		btn7.setFont(new Font("Tahoma", Font.BOLD, 21));
@@ -415,73 +353,54 @@ public class Calcul {
 		btn7.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btn7);
 
-		// ************************* "8" ******************************
+		// ***********Method for the button eight** "8" **************
 
 		JButton btn8 = new JButton("8");
 		btn8.setBackground(new Color(189, 190, 192));
 		btn8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"8");
+
+				writeScreen(enterNum + "8");
 				enterNum = textDisplay.getText();
-				firstnum = Double.valueOf(enterNum);
-				
+				op2 = Double.valueOf(enterNum);
+
 			}
-//				String EnterNum = textDisplay.getText() + btn8.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn8.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
-//			}
+
 		});
 		btn8.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btn8.setBounds(89, 299, 59, 48);
 		btn8.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btn8);
 
-		// ************************* "9" ******************************
+		// **********Method for the button nine "9" *********************
 
 		JButton btn9 = new JButton("9");
 		btn9.setBackground(new Color(189, 190, 192));
 		btn9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				writeScreen(enterNum+"9");
+
+				writeScreen(enterNum + "9");
 				enterNum = textDisplay.getText();
-				firstnum = Double.valueOf(enterNum);
+				op2 = Double.valueOf(enterNum);
 			}
-//				String EnterNum = textDisplay.getText() + btn9.getText();
-//
-//				if (textDisplay.getText().equals("0")) {
-//					EnterNum = btn9.getText();
-//				}
-//				;
-//
-//				textDisplay.setText(EnterNum);
-//			}
+
 		});
 		btn9.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btn9.setBounds(156, 299, 59, 48);
 		btn9.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btn9);
 
-		// ************************* "%" ******************************
+		// *************Method for the button percentage*** "%" **********************
 
 		JButton btnPrctg = new JButton("%");
 		btnPrctg.setBackground(new Color(189, 190, 192));
 		btnPrctg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				// fonction read screan et write
-
 				double prctage_of = readScreen();
 				double prctage = prctage_of / 100;
 
-				textDisplay.setText("");
-				textDisplay.setText(textDisplay.getText() + prctage);
+				textDisplay.setText(prctage + "");
 
 			}
 
@@ -491,7 +410,7 @@ public class Calcul {
 
 		frame.getContentPane().add(btnPrctg);
 
-		// ************************* "\u221A" ******************************
+		// ************Method for the button square root*** "\u221A" ***************
 
 		JButton btnRacineC = new JButton("\u221A");
 		btnRacineC.setBackground(new Color(189, 190, 192));
@@ -508,15 +427,14 @@ public class Calcul {
 		btnRacineC.setBorder(new RoundBtn(20));
 		frame.getContentPane().add(btnRacineC);
 
-		// ************************* "MRC" ******************************
+		// **********Method for the button display memory* "MRC" ************
 
 		JButton btnMRC = new JButton("MRC");
 		btnMRC.setBackground(new Color(189, 190, 192));
 		btnMRC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				firstnum = memory;
-				textDisplay.setText(Double.toString(firstnum));
+				textDisplay.setText(Double.toString(memory));
 
 			}
 		});
@@ -526,16 +444,15 @@ public class Calcul {
 		btnMRC.setMargin(new Insets(0, 0, 0, 0));
 		frame.getContentPane().add(btnMRC);
 
-		// ************************* "M+" ******************************
+		// **************Method for the button add memory "M+" *************
 
 		JButton btnMp = new JButton("M+");
 		btnMp.setBackground(new Color(189, 190, 192));
 		btnMp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				firstnum = Double.parseDouble(textDisplay.getText());
-				memory += firstnum;
-				// firstnum = 0;
+				memory += Double.parseDouble(textDisplay.getText());
+
 			}
 		});
 
@@ -545,15 +462,14 @@ public class Calcul {
 		btnMp.setMargin(new Insets(2, 5, 2, 5));
 		frame.getContentPane().add(btnMp);
 
-		// ************************* "M-" ******************************
+		// ***************Method for the button delete memory "M-"
+		// ***********************
 
 		JButton btnMm = new JButton("M-");
 		btnMm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				firstnum = Double.parseDouble(textDisplay.getText());
-				memory -= firstnum;
-				// firstnum = 0;
+				memory -= Double.parseDouble(textDisplay.getText());
 
 			}
 		});
@@ -564,22 +480,25 @@ public class Calcul {
 		btnMm.setMargin(new Insets(2, 5, 2, 5));
 		frame.getContentPane().add(btnMm);
 
-		// ************************* "CE" ******************************
+		// *************Method for the button delete "CE" *********************
 
 		JButton btnCE = new JButton("CE");
 		btnCE.setBackground(new Color(189, 190, 192));
 		btnCE.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String back = null;
-				if (textDisplay.getText().length() > 0)
-					;
-				{
 
-					StringBuilder strB = new StringBuilder(textDisplay.getText());
-					//strB.deleteCharAt(textDisplay.getText().length() - 1);
-					back = strB.toString();
-					textDisplay.setText(back);
-				}
+				textDisplay.setText("0");
+				enterNum = "";
+				op2 = 0d;
+
+//				String back = null;
+//				if (textDisplay.getText().length() > 0);{
+//
+//					StringBuilder strB = new StringBuilder(textDisplay.getText());
+//					strB.deleteCharAt(textDisplay.getText().length() - 1);
+//					back = strB.toString();
+//					textDisplay.setText(back);
+//				}
 			}
 		});
 
@@ -588,7 +507,7 @@ public class Calcul {
 
 		frame.getContentPane().add(btnCE);
 
-		// ************************* "ON" ******************************
+		// *************Method for the button "ON" ************************
 
 		JButton btnON = new JButton("ON-C");
 		btnON.setForeground(Color.WHITE);
@@ -596,7 +515,13 @@ public class Calcul {
 
 		btnON.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
+				op1 = 0d;
+				op2 = 0d;
+				operations = '\u0000';
 				textDisplay.setText("");
+				enterNum = "";
+				result = "";
 			}
 		});
 		btnON.setFont(new Font("Tahoma", Font.PLAIN, 21));
@@ -619,6 +544,7 @@ public class Calcul {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	// *************Method to read the screen" *************
 	public double readScreen() {
 
 		String s = textDisplay.getText().replace(',', '.');
@@ -628,51 +554,56 @@ public class Calcul {
 		return Double.parseDouble(s);
 	}
 
+	// *************Methods to write on the screen" *************
+	// Read String
 	public void writeScreen(String s) {
 
 		textDisplay.setText(s);
 	}
 
+	// Read character
 	public void addCharScreen(char c) {
 		String v = textDisplay.getText();
 		textDisplay.setText(v + c);
 
 	}
 
-	public void addIntScrean(int i) {
+	// Read integer
+	public void addIntScreen(int i) {
 		String v = textDisplay.getText();
 		textDisplay.setText(v + i);
 	}
 
-	public void calcul() {
-		System.out.println("1)F: " + firstnum + " s: " + secondnum + " num: " + num + " operation: " + operations);
+	// *************a switch method for operations ************************
 
+	public void calcul() {
+		System.out.println("1)F: " + op1 + " s: " + op2 + " num: " + num + " operation: " + operations);
+		op2 = Double.parseDouble(textDisplay.getText());
 		num = true;
 
 		switch (operations) {
 		case '+':
-			secondnum+= firstnum ;
+			op1 += op2;
 			break;
 		case '-':
-			secondnum -= firstnum;
+			op1 -= op2;
 			break;
 		case '*':
-			secondnum *= firstnum;
+			op1 *= op2;
 			break;
 		case '/':
-			secondnum /=firstnum ;
+			op1 /= op2;
 			break;
 		default:
-			secondnum = firstnum;
+			op1 = op2;
 		}
 		enterNum = "";
 
-		// operations = null;
-		result = String.valueOf(secondnum);
+		result = String.valueOf(op1);
 
 		textDisplay.setText(result);
 
-		System.out.println("2)F: " + firstnum + " s: " + secondnum + " num: " + num + " operation: " + operations);
+		System.out.println("2)F: " + op1 + " s: " + op2 + " num: " + num + " operation: " + operations);
 
 	}
 
